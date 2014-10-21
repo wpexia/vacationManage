@@ -12,18 +12,20 @@
 */
 
 Route::group(array('before' => 'login'), function () {
-	Route::get('/', function () {
-		$data = array(0=>['userId'=>'1','name'=>'王建硕','department'=>'管理部','enterDate'=>'2005-03-01']);
-		return View::make('employee',array('data'=>$data));
-	});
+	Route::get('/', 'EmployeeController@index');
 
 	Route::get('forget', function () {
 		Session::flush();
 		return "reset all session!";
 	});
-	Route::get('logout',function(){
+	Route::get('logout', function () {
 		Session::forget('userEnmail');
 		Return Redirect::to('http://www.baixing.com');
+	});
+	Route::get('test', function () {
+		$all = Employee::All();
+
+		return '';
 	});
 });
 
