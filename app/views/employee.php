@@ -200,9 +200,9 @@
 		};
 		var url = function (data) {
 			var urls = {
-				enter: '/hrmanage/employee',
-				leave: '/hrmanage/employee',
-				update: '/hrmanage/employee',
+				enter: '/myla/laravel/public/employee',
+				leave: '/myla/laravel/public/employee',
+				update: '/myla/laravel/public/employee',
 				stat: '/hrmanage/vacation_stat',
 				detail: '/hrmanage/vacation_stat_detail',
 				who: '/hrmanage/who',

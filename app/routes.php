@@ -23,10 +23,21 @@ Route::group(array('before' => 'login'), function () {
 		Return Redirect::to('http://www.baixing.com');
 	});
 	Route::get('test', function () {
-		$all = Employee::All();
-
-		return '';
+		$array = [
+			'result'=>'success',
+			'data'=>[
+				'eid'=>'1',
+				'name'=>'王建硕',
+				"department"=>"管理部",
+				"enterDate"=>"2005-03-01",
+				"status"=>1
+			]
+		];
+		$json = '{"result":"success","data":{"id":"emp:542261c29c22eec1378b459e","eid":1,"name":"王建硕","department":"管理部","enterDate":"2005-03-01","status":1,"interval":[],"modifiedTime":1411539394,"createdTime":1411539394}}';
+		return json_encode($array,JSON_UNESCAPED_UNICODE);
 	});
+
+	Route::get('employee','EmployeeController@selectAction');
 });
 
 Route::get('login', 'GoogleController@index');
