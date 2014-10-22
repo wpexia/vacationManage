@@ -39,4 +39,6 @@ class EmployeeController extends BaseController {
 		];
 		return json_encode($array,JSON_UNESCAPED_UNICODE);
 	}
+
+
 }
