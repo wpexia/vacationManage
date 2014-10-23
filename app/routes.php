@@ -24,20 +24,22 @@ Route::group(array('before' => 'login'), function () {
 	});
 	Route::get('test', function () {
 		$array = [
-			'result'=>'success',
-			'data'=>[
-				'eid'=>'1',
-				'name'=>'王建硕',
-				"department"=>"管理部",
-				"enterDate"=>"2005-03-01",
-				"status"=>1
+			'result' => 'success',
+			'data' => [
+				'eid' => '1',
+				'name' => '王建硕',
+				"department" => "管理部",
+				"enterDate" => "2005-03-01",
+				"status" => 1
 			]
 		];
 		$json = '{"result":"success","data":{"id":"emp:542261c29c22eec1378b459e","eid":1,"name":"王建硕","department":"管理部","enterDate":"2005-03-01","status":1,"interval":[],"modifiedTime":1411539394,"createdTime":1411539394}}';
-		return json_encode($array,JSON_UNESCAPED_UNICODE);
+		return json_encode($array, JSON_UNESCAPED_UNICODE);
 	});
 
-	Route::get('employee','EmployeeController@selectAction');
+	Route::get('employee', 'EmployeeController@selectAction');
+
+	Route::get('qingjia', 'EmployeeController@index');
 });
 
 Route::get('login', 'GoogleController@index');

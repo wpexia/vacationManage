@@ -4,7 +4,16 @@ class Employee extends Eloquent {
 
 	protected $table = 'employee';
 
-	protected $fillable = array('userId', 'name', 'email', 'enterDate', 'status', 'surplus', 'department','leaveDate');
+	protected $fillable = array(
+		'userId',
+		'name',
+		'email',
+		'enterDate',
+		'status',
+		'surplus',
+		'department',
+		'leaveDate'
+	);
 
 	public function getByName($name) {
 
@@ -15,9 +24,9 @@ class Employee extends Eloquent {
 	}
 
 	public static function getByUserId($userId) {
-		try{
+		try {
 			$model = Employee::where('userId', '=', $userId)->firstOrFail();
-		}catch (Exception $e){
+		} catch (Exception $e) {
 			return null;
 		}
 		return $model;
