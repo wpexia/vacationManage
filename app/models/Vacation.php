@@ -12,5 +12,10 @@ class Vacation extends Eloquent {
 		'comment',
 	);
 
+	public static function getByUserIdAndDate($userId, $date) {
+		try{
+			$model = Vacation::where('userId','=',$userId,)
+		}
+	}
 
 }
