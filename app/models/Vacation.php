@@ -13,9 +13,11 @@ class Vacation extends Eloquent {
 	);
 
 	public static function getByUserIdAndDate($userId, $date) {
-		try{
-			$model = Vacation::where('userId','=',$userId,)
+		try {
+			$model = Vacation::where('userId', '=', $userId)->where('date', '=', $date);
+		} catch (Exception $e) {
+			return null;
 		}
+		return $model;
 	}
-
 }

@@ -31,4 +31,13 @@ class Employee extends Eloquent {
 		}
 		return $model;
 	}
+
+	public function initSurplus($year) {
+		$days = [0,0,31,59,90,120,151,181,212,243,273,304,334];
+		if($year == intval(explode('-',$this->enterDate)[0])){
+			$day = $days[intval(explode('-',$this->enterDate)[2])]+intval(explode('-',$this->enterDate)[3]);
+			return round($day*20/365)/2;
+		}
+
+	}
 }
