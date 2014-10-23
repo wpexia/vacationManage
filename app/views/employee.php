@@ -206,7 +206,7 @@
 				stat: '/hrmanage/vacation_stat',
 				detail: '/hrmanage/vacation_stat_detail',
 				who: '/hrmanage/who',
-				qingjia: '/hrmanage/qingjia'
+				qingjia: '/myla/laravel/public/qingjia'
 			};
 			return urls[data.operation];
 		};
