@@ -6,6 +6,9 @@ define('redirect_uri','http://wpexia.com/myla/laravel/public/auth2');
 
 class GoogleController extends BaseController {
 
+	/**
+	 * @var Google_Client
+	 */
 	private $client = null;
 
 	private function init(){
@@ -22,6 +25,7 @@ class GoogleController extends BaseController {
 
 	public function index(){
 		self::init();
+
 		$authUrl = $this->client->createAuthUrl();
 
 		return Redirect::to($authUrl);

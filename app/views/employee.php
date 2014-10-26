@@ -203,9 +203,9 @@
 				enter: '/myla/laravel/public/employee',
 				leave: '/myla/laravel/public/employee',
 				update: '/myla/laravel/public/employee',
-				stat: '/hrmanage/vacation_stat',
-				detail: '/hrmanage/vacation_stat_detail',
-				who: '/hrmanage/who',
+				stat: '/myla/laravel/public/vacation_stat',
+				detail: '/myla/laravel/public/vacation_stat_detail',
+				who: '/myla/laravel/public/who',
 				qingjia: '/myla/laravel/public/qingjia'
 			};
 			return urls[data.operation];
