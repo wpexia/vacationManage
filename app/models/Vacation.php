@@ -10,11 +10,13 @@ class Vacation extends Eloquent {
 		'type',
 		'duration',
 		'comment',
+		'bonus',
 	);
 
 	public static function getByUserIdAndDate($userId, $date) {
 		try {
 			$model = Vacation::where('userId', '=', $userId)->where('date', '=', $date);
+			$model = $model->firstOrFail();
 		} catch (Exception $e) {
 			return null;
 		}

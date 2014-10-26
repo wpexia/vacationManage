@@ -39,7 +39,7 @@ Route::group(array('before' => 'login'), function () {
 
 	Route::get('employee', 'EmployeeController@selectAction');
 
-	Route::get('qingjia', 'EmployeeController@index');
+	Route::get('qingjia', 'VacationController@qingjia');
 });
 
 Route::get('login', 'GoogleController@index');
