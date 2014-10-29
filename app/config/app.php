@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://localhost/myla/laravel/public/',
+	'url' => 'http://wpexia.com/laravel/public/',
 
 	/*
 	|--------------------------------------------------------------------------

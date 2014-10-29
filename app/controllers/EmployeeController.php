@@ -56,6 +56,7 @@ class EmployeeController extends BaseController {
 		$employee->name = Input::get('name');
 		$employee->department = Input::get('department');
 		$employee->enterDate = Input::get('date');
+		$employee->email = Input::get('email');
 		$employee->status = 1;
 		$employee->save();
 
@@ -67,6 +68,7 @@ class EmployeeController extends BaseController {
 				"department" => $employee->department,
 				"enterDate" => $employee->enterDate,
 				"status" => $employee->status,
+				"email" => $employee->email,
 			]
 		];
 
