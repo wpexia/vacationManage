@@ -1,7 +1,7 @@
 <?php
 define('client_id',"857533827039-cdm67hrc9rqmqcvv5kaq84o25vuhlelc.apps.googleusercontent.com");
 define('client_secret','6bDMK7AJ8I-szv1PaiaGZnhZ');
-define('redirect_uri','http://wpexia.com/myla/laravel/public/auth2');
+define('redirect_uri','http://wpexia.com/laravel/public/auth2');
 
 
 class GoogleController extends BaseController {

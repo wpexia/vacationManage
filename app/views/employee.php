@@ -58,6 +58,9 @@
 			display: none
 		}
 
+		input {
+			width: auto;
+		}
 		.editing .edit-panel {
 			display: block;
 			margin: 0 auto;
@@ -86,8 +89,8 @@
 		</div>
 		<!-- #sidebar-shortcuts-->
 		<ul class='nav nav-list'>
-			<li class='active'><a href='/hrmanage/employee_manage'><span class='menu-text'>人员管理</span></a></li>
-			<li><a href='/hrmanage/vacation'><span class='menu-text'>假期查询</span></a></li>
+			<li class='active'><a href='/laravel/public/'><span class='menu-text'>人员管理</span></a></li>
+			<li><a href='/laravel/public/vacation'><span class='menu-text'>假期查询</span></a></li>
 		</ul>
 	</div>
 </div>
@@ -106,6 +109,7 @@
 				<th>姓名</th>
 				<th>部门</th>
 				<th>入职日期</th>
+				<th>邮箱</th>
 				<th style='width:120px'>
 					<button id='insert' style='display:block;margin:0 auto' class='btn btn-mini btn-success'><i
 							class='icon icon-plus'></i></button>
@@ -116,6 +120,7 @@
 				<td><input type='text' name='name' id='name-input' class='input-small'></td>
 				<td><input type='text' name='department' id='department-input' class='input-small'></td>
 				<td><input type='text' name='date' value='2014-10-20' id='date-input' class='input-small'></td>
+				<td><input type='text' name='email' id='email-input' class='input-small'></td>
 				<td>
 					<div style='width:120px;margin:0 auto;'>
 						<button id='submit' class='btn btn-mini btn-warning'><i class='icon icon-ok'></i></button>
@@ -125,6 +130,7 @@
 				</td>
 			</tr>
 			<tr class='hidden'>
+				<td></td>
 				<td></td>
 				<td></td>
 				<td></td>
@@ -141,6 +147,7 @@
 						<td><?php echo $employee['name'];?></td>
 						<td><?php echo $employee['department'];?></td>
 						<td><?php echo $employee['enterDate'];?></td>
+						<td><?php echo $employee['email'];?></td>
 						<td>
 							<div class='edit-panel'>
 								<button class='btn btn-mini btn-warning edit-save'><i class='icon icon-ok'></i></button>
@@ -200,13 +207,13 @@
 		};
 		var url = function (data) {
 			var urls = {
-				enter: '/myla/laravel/public/employee',
-				leave: '/myla/laravel/public/employee',
-				update: '/myla/laravel/public/employee',
-				stat: '/myla/laravel/public/vacation_stat',
-				detail: '/myla/laravel/public/vacation_stat_detail',
-				who: '/myla/laravel/public/who',
-				qingjia: '/myla/laravel/public/qingjia'
+				enter: '/laravel/public/employee',
+				leave: '/laravel/public/employee',
+				update: '/laravel/public/employee',
+				stat: '/laravel/public/vacation_stat',
+				detail: '/laravel/public/vacation_stat_detail',
+				who: '/laravel/public/who',
+				qingjia: '/laravel/public/qingjia'
 			};
 			return urls[data.operation];
 		};
@@ -229,7 +236,7 @@
 		};
 	})();</script>
 <script> var validate_employee = function (inputs) {
-		var keys = ['工号', '姓名', '部门', '入职日期'];
+		var keys = ['工号', '姓名', '部门', '入职日期','邮箱'];
 		for (var i in keys) {
 			if ($.trim(inputs[i].value).length == 0) {
 				alert('请填写' + keys[i]);
@@ -249,7 +256,7 @@
 	var table = $('#vacation').DataTable({
 		columnDefs: [{
 			targets: -1,
-			defaultContent: '<div class="edit-panel">' + '<button class="btn btn-mini btn-warning edit-save">' + '<i class="icon icon-ok"></i>' + '</button>' + '<button class="btn btn-mini edit-discard" style="margin-left:2px">' + '<i class="icon icon-remove"></i>' + '</button>' + '</div>' + '<div class="control-panel">' + '<button class="btn btn-mini btn-info line-vacation">' + '<i class="icon icon-calendar"></i>' + '</button>' + '<button class="btn btn-mini btn-success line-edit" style="margin-left:2px">' + '<i class="icon icon-edit"></i>' + '</button>' + '<button class="btn btn-mini btn-danger line-erase" style="margin-left:2px">' + '<i class="icon icon-minus"></i>' + '</button>' + '</div>'
+			defaultContent: '<div class="edit-panel">' + '<button class="btn btn-mini btn-warning edit-save">' + '<i class="icon icon-ok"></i>' + '</button>' + '<button class="btn btn-mini edit-discard" style="">' + '<i class="icon icon-remove"></i>' + '</button>' + '</div>' + '<div class="control-panel">' + '<button class="btn btn-mini btn-info line-vacation">' + '<i class="icon icon-calendar"></i>' + '</button>' + '<button class="btn btn-mini btn-success line-edit" style="">' + '<i class="icon icon-edit"></i>' + '</button>' + '<button class="btn btn-mini btn-danger line-erase" style="">' + '<i class="icon icon-minus"></i>' + '</button>' + '</div>'
 		}],
 		order: [0, 'asc'],
 		ordering: true,
@@ -284,7 +291,7 @@
 		window.send({
 			operation: 'enter', data: inputs.serialize(), callback: function (response) {
 				$('#drop').click();
-				table.row.add([response.data.eid, response.data.name, response.data.department, response.data.enterDate,]).order([0, 'asc']).draw();
+				table.row.add([response.data.eid, response.data.name, response.data.department, response.data.enterDate, response.data.email, ]).order([0, 'asc']).draw();
 			}
 		});
 	});
@@ -348,9 +355,9 @@
 			var val = $.trim(td.innerHTML);
 			td.innerHTML = '<input name="' + name + '" type="text" value="' + val + '"/>';
 		};
-		var keys = ['eid', 'name', 'department', 'date'];
+		var keys = ['eid', 'name', 'department', 'date', 'email'];
 		$(tds[0]).append('<input type="hidden" name="eid" value="' + $.trim(tds[0].innerHTML) + '"/>');
-		for (var i = 1; i < 4; ++i) {
+		for (var i = 1; i < 5; ++i) {
 			editable(tds[i], keys[i]);
 		}
 	}).on('click', '.edit-save', function (e) {
@@ -372,7 +379,7 @@
 			$(td).text($(td).find('input').val());
 		};
 		$(tds[0]).find('input').remove();
-		for (var i = 1; i < 4; ++i) {
+		for (var i = 1; i < 5; ++i) {
 			textify(tds[i]);
 		}
 	});</script>
