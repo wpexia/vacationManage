@@ -54,5 +54,7 @@ class VacationController extends BaseController {
 		return '{"result":"success","data":null}';
 	}
 
+	public function vacation_stat() {
 
+	}
 }
