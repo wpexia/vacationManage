@@ -23,13 +23,16 @@ Route::group(array('before' => 'login'), function () {
 		Return Redirect::to('http://www.baixing.com');
 	});
 	Route::get('test', function () {
-		return View::make('vacation');
+		var_dump(((string)(round((365 - 273) * 20 / 365) /2)));
+		return " a";
 	});
 
 	Route::get('employee', 'EmployeeController@selectAction');
 	Route::get('vacation', 'VacationController@vacation');
 	Route::get('qingjia', 'VacationController@qingjia');
 	Route::get('vacation_stat', 'VacationController@vacation_stat');
+	Route::get('vacation_stat_detail','VacationController@vacation_stat_detail');
+	Route::get('xiaojia','VacationController@xiaojia');
 });
 
 Route::get('login', 'GoogleController@index');
