@@ -67,6 +67,7 @@ class VacationController extends BaseController {
 		}
 		$tmp = array();
 		foreach ($employees as $employee) {
+			if($employee == null)continue;
 			$surplus = json_decode($employee->surplus, true);
 			if (!isset($surplus[$year])) {
 				$surplus[$year] = $employee->initSurplus(intval($year));

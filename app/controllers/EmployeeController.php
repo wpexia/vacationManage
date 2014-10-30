@@ -17,6 +17,7 @@ class EmployeeController extends BaseController {
 	}
 
 	public function selectAction() {
+		if(Input::get('operation') == null) return call_user_func('self::index');
 		return call_user_func('self::' . Input::get('operation'));
 	}
 
