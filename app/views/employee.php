@@ -3,6 +3,8 @@
 <head>
 	<meta charset='utf-8'>
 	<title>PP</title>
+	<link rel=”icon” href=”/favicon.ico” mce_href=”/favicon.ico” type=”image/x-icon”>
+	<link rel=”shortcut icon” href=”/favicon.ico” mce_href=”/favicon.ico” type=”image/x-icon”>
 	<meta name='description' content='employee manage for hr'>
 	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
 	<link href='http://s.baixing.net/ace/css/bootstrap.min.css' rel='stylesheet'>
@@ -89,8 +91,8 @@
 		</div>
 		<!-- #sidebar-shortcuts-->
 		<ul class='nav nav-list'>
-			<li class='active'><a href='/laravel/public/'><span class='menu-text'>人员管理</span></a></li>
-			<li><a href='/laravel/public/vacation'><span class='menu-text'>假期查询</span></a></li>
+			<li class='active'><a href='/employee'><span class='menu-text'>人员管理</span></a></li>
+			<li><a href='/'><span class='menu-text'>假期查询</span></a></li>
 		</ul>
 	</div>
 </div>
@@ -207,13 +209,13 @@
 		};
 		var url = function (data) {
 			var urls = {
-				enter: '/laravel/public/employee',
-				leave: '/laravel/public/employee',
-				update: '/laravel/public/employee',
-				stat: '/laravel/public/vacation_stat',
-				detail: '/laravel/public/vacation_stat_detail',
-				who: '/laravel/public/who',
-				qingjia: '/laravel/public/qingjia'
+				enter: '/employee',
+				leave: '/employee',
+				update: '/employee',
+				stat: '/vacation_stat',
+				detail: '/vacation_stat_detail',
+				who: '/who',
+				qingjia: '/qingjia'
 			};
 			return urls[data.operation];
 		};

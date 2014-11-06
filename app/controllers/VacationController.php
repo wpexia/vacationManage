@@ -23,6 +23,11 @@ class VacationController extends BaseController {
 		$year = explode('-', $date)[0];
 		$month = explode('-', $date)[1];
 		$days = $duration == 'all' ? 1 : 0.5;
+		if($days>(float)($surplus[$year][$type]))$type = 'annual';
+		if($month<7&&$type == 'sick'){
+			if((float)($surplus[(String)(intval($year) - 1)]['sick'])<$days&&(float)($surplus[(String)(intval($year) - 1)]['annual']>0))
+				$type = 'annual';
+		}
 		$bonus = 0;
 		if ($month < 7) {
 			if (isset($surplus[(String)(intval($year) - 1)])) {
@@ -60,13 +65,14 @@ class VacationController extends BaseController {
 
 	public function vacation_stat() {
 		$year = Input::get('year');
-		if (Session::get('userEmail') != 'huanglinjie@baixing.com') {
+		if (!in_array(Session::get('userEmail'),['huanglinjie@baixing.com','lihanyang@baixing.net']) ) {
 			$employees = [Employee::getByEmail(Session::get('userEmail'))];
 		} else {
 			$employees = Employee::all();
 		}
 		$tmp = array();
 		foreach ($employees as $employee) {
+			if ($employee == null) continue;
 			$surplus = json_decode($employee->surplus, true);
 			if (!isset($surplus[$year])) {
 				$surplus[$year] = $employee->initSurplus(intval($year));
@@ -74,33 +80,20 @@ class VacationController extends BaseController {
 			if (!isset($surplus[(String)(intval($year) - 1)])) {
 				$surplus[(String)(intval($year) - 1)] = $employee->initSurplus(intval($year) - 1);
 			}
-			$vacations = Vacation::getByuserAndYear($employee->userId, (int)$year);
-			$tyear = array(
-				'annual' => 0,
-				'sick' => 0,
-			);
-			$lyear = array(
-				'annual' => 0,
-				'sick' => 0,
-			);
-			foreach ($vacations as $vacation) {
-				$days = $vacation['duration'] == 'all' ? 1 : 0.5;
-				$bonus = (float)$vacation['bonus'];
-				$lyear[$vacation['type']] += $bonus;
-				$tyear[$vacation['type']] += ($days - $bonus);
-			}
+			$tyear = $employee->initSurplus(intval($year));
+			$lyear = $employee->initSurplus(intval($year) - 1);
 			$tmp[$employee->userId] = array(
 				'annual' => array(
-					'normal_used' => $tyear['annual'],
-					'bonus_used' => $lyear['annual'],
-					'normal_total' => $tyear['annual'] + (float)$surplus[$year]['annual'],
-					'bonus_total' => $lyear['annual'] + (float)$surplus[(String)(intval($year) - 1)]['annual'],
+					'normal_used' => (float)$tyear['annual'] - (float)$surplus[$year]['annual'],
+					'bonus_used' => (float)$lyear['annual'] - (float)$surplus[(String)(intval($year) - 1)]['annual'],
+					'normal_total' => (float)$tyear['annual'],
+					'bonus_total' => (float)$lyear['annual'],
 				),
 				'sick' => array(
-					'normal_used' => $tyear['sick'],
-					'bonus_used' => $lyear['sick'],
-					'normal_total' => $tyear['sick'] + (float)$surplus[$year]['sick'],
-					'bonus_total' => $lyear['sick'] + (float)$surplus[(String)(intval($year) - 1)]['sick'],
+					'normal_used' => (float)$tyear['sick'] - (float)$surplus[$year]['sick'],
+					'bonus_used' => (float)$lyear['sick'] - (float)$surplus[(String)(intval($year) - 1)]['sick'],
+					'normal_total' => (float)$tyear['sick'],
+					'bonus_total' => (float)$lyear['sick'],
 				),
 				'name' => $employee->name,
 				'status' => $employee->status,
