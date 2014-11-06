@@ -1,7 +1,7 @@
 <?php
 define('client_id',"857533827039-cdm67hrc9rqmqcvv5kaq84o25vuhlelc.apps.googleusercontent.com");
 define('client_secret','6bDMK7AJ8I-szv1PaiaGZnhZ');
-define('redirect_uri','http://nianjia.baixing.com/laravel/public/auth2');
+define('redirect_uri','http://nianjia.baixing.cn/auth2');
 
 
 

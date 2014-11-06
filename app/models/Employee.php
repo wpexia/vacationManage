@@ -15,8 +15,21 @@ class Employee extends Eloquent {
 		'leaveDate'
 	);
 
-	public function getByName($name) {
-
+	/**
+	 * @param string $name
+	 * @return Employee
+	 * @static
+	 */
+	public static function getByName($name) {
+		if ($name == null) {
+			return null;
+		}
+		try {
+			$model = Employee::where('name', '=', $name)->firstOrFail();
+		} catch (Exception $e) {
+			return null;
+		}
+		return $model;
 	}
 
 	public function toArray() {
@@ -54,8 +67,8 @@ class Employee extends Eloquent {
 			return ['annual' => (string)((round((365 - $day) * 20 / 365)) / 2.0), 'sick' => (string)((round((365 - $day) * 10 / 365)) / 2.0)];
 		}
 		$day = 10;
-		$day = min(15, $day + intval(date('Y')) - $year);
-		return ['annual' => (string)$day, 'sick' => '5'];
+		$day = min(15, $day + $year - intval(explode('-', $this->enterDate)[0]));
+		return ['annual' => (String)$day, 'sick' => '5'];
 	}
 
 	/**

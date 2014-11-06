@@ -86,4 +86,20 @@ Route::filter('login',function(){
 		Session::put('redirect',URL::current());
 		return  Redirect::action('GoogleController@index');
 	}
+	if(in_array(Session::get('userEmail'),['huanglinjie@baixing.com','lihanyang@baixing.net']))
+		return;
+	if(!preg_match('/.*@baixing.com/',Session::get('userEmail'))){
+		return Redirect::to('error');
+	}
+});
+
+Route::filter('superman',function(){
+	if(!Session::has('userEmail')){
+		Session::put('redirect',URL::current());
+		return  Redirect::action('GoogleController@index');
+	}
+	if(in_array(Session::get('userEmail'),['huanglinjie@baixing.com','lihanyang@baixing.net'])){
+		Session::put('redirect',URL::current());
+		return  Redirect::action('GoogleController@index');
+	}
 });
