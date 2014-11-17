@@ -2,6 +2,7 @@
 
 class VacationController extends BaseController {
 	public function qingjia() {
+		$dataFlag = 1;
 		$userId = Input::get('eid');
 		$date = Input::get('date');
 		$duration = Input::get('duration');
@@ -16,6 +17,8 @@ class VacationController extends BaseController {
 			}
 		}
 		$employee = Employee::getByUserId($userId);
+		if($date < $employee->enterDate)
+			return '{"result":"请假日期早于入职日期"}';
 		if (!$employee || !$employee->status) {
 			return '{"result":"没有这位在职员工"}';
 		}
@@ -23,8 +26,8 @@ class VacationController extends BaseController {
 		$year = explode('-', $date)[0];
 		$month = explode('-', $date)[1];
 		$days = $duration == 'all' ? 1 : 0.5;
-		if($days>(float)($surplus[$year][$type]))$type = 'annual';
-		if($month<7&&$type == 'sick'){
+		if($days>(float)($surplus[$year][$type])&&$dataFlag)$type = 'annual';
+		if($month<7&&$type == 'sick'&&$dataFlag){
 			if((float)($surplus[(String)(intval($year) - 1)]['sick'])<$days&&(float)($surplus[(String)(intval($year) - 1)]['annual']>0))
 				$type = 'annual';
 		}
@@ -138,7 +141,7 @@ class VacationController extends BaseController {
 	}
 
 	public function xiaojia() {
-		if (Session::get('userEmail') != 'huanglinjie@baixing.com') {
+		if (Session::get('userEmail') != 'huanglinjie@baixing.com'&&Session::get('userEmail') != 'lihanyang@baixing.net') {
 			return $this->error('不是管理员暂时还不能销假哦~');
 		}
 		$id = Input::get('id');

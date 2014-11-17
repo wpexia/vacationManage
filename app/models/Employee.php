@@ -64,7 +64,7 @@ class Employee extends Eloquent {
 		}
 		if ($year == intval(explode('-', $this->enterDate)[0])) {
 			$day = $days[intval(explode('-', $this->enterDate)[1])] + intval(explode('-', $this->enterDate)[2]);
-			return ['annual' => (string)((round((365 - $day) * 20 / 365)) / 2.0), 'sick' => (string)((round((365 - $day) * 10 / 365)) / 2.0)];
+			return ['annual' => (string)((floor((365 - $day) * 20 / 365)) / 2.0), 'sick' => (string)((floor((365 - $day) * 10 / 365)) / 2.0)];
 		}
 		$day = 10;
 		$day = min(15, $day + $year - intval(explode('-', $this->enterDate)[0]));
