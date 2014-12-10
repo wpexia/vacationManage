@@ -18,7 +18,8 @@ Route::group(array('before' => 'login'), function () {
 	Route::get('xiaojia', 'VacationController@xiaojia');
 });
 Route::group(array('before' => 'superman'), function () {
-
+	Route::get('employee', 'EmployeeController@selectAction');
+	Route::get('qingjia', 'VacationController@qingjia');
 	Route::get('clear', 'TestController@clear');
 });
 Route::get('error',function(){
@@ -26,8 +27,6 @@ Route::get('error',function(){
 	Return "请使用baixing.com邮箱登陆";
 });
 
-Route::get('employee', 'EmployeeController@selectAction');
-Route::get('qingjia', 'VacationController@qingjia');
 
 Route::get('login', 'GoogleController@index');
 Route::get('auth2', 'GoogleController@get');

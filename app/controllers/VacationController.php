@@ -26,6 +26,12 @@ class VacationController extends BaseController {
 		$year = explode('-', $date)[0];
 		$month = explode('-', $date)[1];
 		$days = $duration == 'all' ? 1 : 0.5;
+		if (!isset($surplus[$year])) {
+			$surplus[$year] = $employee->initSurplus(intval($year));
+		}
+		if (!isset($surplus[(String)(intval($year) - 1)])) {
+			$surplus[(String)(intval($year) - 1)] = $employee->initSurplus(intval($year) - 1);
+		}
 		if($days>(float)($surplus[$year][$type])&&$dataFlag)$type = 'annual';
 		if($month<7&&$type == 'sick'&&$dataFlag){
 			if((float)($surplus[(String)(intval($year) - 1)]['sick'])<$days&&(float)($surplus[(String)(intval($year) - 1)]['annual']>0))
@@ -37,12 +43,7 @@ class VacationController extends BaseController {
 				$bonus = max(0, min($days, (float)($surplus[(String)(intval($year) - 1)][$type])));
 			}
 		}
-		if (!isset($surplus[$year])) {
-			$surplus[$year] = $employee->initSurplus(intval($year));
-		}
-		if (!isset($surplus[(String)(intval($year) - 1)])) {
-			$surplus[(String)(intval($year) - 1)] = $employee->initSurplus(intval($year) - 1);
-		}
+
 
 		$surplus[$year][$type] = (String)((float)($surplus[$year][$type]) - ($days - $bonus));
 		$surplus[(String)(intval($year) - 1)][$type] = (String)((float)($surplus[(String)(intval($year) - 1)][$type]) - $bonus);
@@ -68,11 +69,12 @@ class VacationController extends BaseController {
 
 	public function vacation_stat() {
 		$year = Input::get('year');
-		if (!in_array(Session::get('userEmail'),['huanglinjie@baixing.com','lihanyang@baixing.net']) ) {
+		if (!in_array(Session::get('userEmail'),['huanglingjie@baixing.com','lihanyang@baixing.net']) ) {
 			$employees = [Employee::getByEmail(Session::get('userEmail'))];
 		} else {
 			$employees = Employee::all();
 		}
+//		$employees = Employee::all();
 		$tmp = array();
 		foreach ($employees as $employee) {
 			if ($employee == null) continue;
