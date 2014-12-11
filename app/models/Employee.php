@@ -1,6 +1,7 @@
 <?php
 
-class Employee extends Eloquent {
+class Employee extends Eloquent
+{
 
 	protected $table = 'employee';
 
@@ -20,7 +21,8 @@ class Employee extends Eloquent {
 	 * @return Employee
 	 * @static
 	 */
-	public static function getByName($name) {
+	public static function getByName($name)
+	{
 		if ($name == null) {
 			return null;
 		}
@@ -32,7 +34,8 @@ class Employee extends Eloquent {
 		return $model;
 	}
 
-	public function toArray() {
+	public function toArray()
+	{
 		return ['userId' => $this->userId, 'name' => $this->name, 'department' => $this->department, 'enterDate' => $this->enterDate, 'email' => $this->email];
 	}
 
@@ -41,7 +44,8 @@ class Employee extends Eloquent {
 	 * @return Employee
 	 * @static
 	 */
-	public static function getByUserId($userId) {
+	public static function getByUserId($userId)
+	{
 		if ($userId == null) {
 			return null;
 		}
@@ -57,14 +61,15 @@ class Employee extends Eloquent {
 	 * @param int $year
 	 * @return array
 	 */
-	public function initSurplus($year) {
+	public function initSurplus($year)
+	{
 		$days = [0, 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
 		if ($year < intval(explode('-', $this->enterDate)[0])) {
 			return ['annual' => '0', 'sick' => '0'];
 		}
 		if ($year == intval(explode('-', $this->enterDate)[0])) {
 			$day = $days[intval(explode('-', $this->enterDate)[1])] + intval(explode('-', $this->enterDate)[2]);
-			return ['annual' => (string)((round((365 - $day) * 20 / 365)) / 2.0), 'sick' => (string)((round((365 - $day) * 10 / 365)) / 2.0)];
+			return ['annual' => (string)((floor((365 - $day) * 30 / 365)) / 2.0 - (floor((365 - $day) * 10 / 365)) / 2.0), 'sick' => (string)((floor((365 - $day) * 10 / 365)) / 2.0)];
 		}
 		$day = 10;
 		$day = min(15, $day + $year - intval(explode('-', $this->enterDate)[0]));
@@ -75,7 +80,8 @@ class Employee extends Eloquent {
 	 * @param String $email
 	 * @return Employee
 	 */
-	public static function getByEmail($email) {
+	public static function getByEmail($email)
+	{
 		if ($email == null)
 			return null;
 		try {

@@ -74,7 +74,7 @@
 		<!-- #sidebar-shortcuts-->
 		<ul class='nav nav-list'>
 			<li><a href='/employee'><span class='menu-text'>人员管理</span></a></li>
-			<li class='active'><a href='/vacation'><span class='menu-text'>假期查询</span></a></li>
+			<li class='active'><a href='#'><span class='menu-text'>假期查询</span></a></li>
 		</ul>
 	</div>
 </div>

@@ -98,7 +98,7 @@ Route::filter('superman',function(){
 		Session::put('redirect',URL::current());
 		return  Redirect::action('GoogleController@index');
 	}
-	if(in_array(Session::get('userEmail'),['huanglinjie@baixing.com','lihanyang@baixing.net'])){
+	if(!in_array(Session::get('userEmail'),['huanglingjie@baixing.com','lihanyang@baixing.net'])){
 		Session::put('redirect',URL::current());
 		return  Redirect::action('GoogleController@index');
 	}

@@ -2,6 +2,7 @@
 
 class VacationController extends BaseController {
 	public function qingjia() {
+		$dataFlag = 1;
 		$userId = Input::get('eid');
 		$date = Input::get('date');
 		$duration = Input::get('duration');
@@ -16,6 +17,8 @@ class VacationController extends BaseController {
 			}
 		}
 		$employee = Employee::getByUserId($userId);
+		if($date < $employee->enterDate)
+			return '{"result":"请假日期早于入职日期"}';
 		if (!$employee || !$employee->status) {
 			return '{"result":"没有这位在职员工"}';
 		}
@@ -23,8 +26,14 @@ class VacationController extends BaseController {
 		$year = explode('-', $date)[0];
 		$month = explode('-', $date)[1];
 		$days = $duration == 'all' ? 1 : 0.5;
-		if($days>(float)($surplus[$year][$type]))$type = 'annual';
-		if($month<7&&$type == 'sick'){
+		if (!isset($surplus[$year])) {
+			$surplus[$year] = $employee->initSurplus(intval($year));
+		}
+		if (!isset($surplus[(String)(intval($year) - 1)])) {
+			$surplus[(String)(intval($year) - 1)] = $employee->initSurplus(intval($year) - 1);
+		}
+		if($days>(float)($surplus[$year][$type])&&$dataFlag)$type = 'annual';
+		if($month<7&&$type == 'sick'&&$dataFlag){
 			if((float)($surplus[(String)(intval($year) - 1)]['sick'])<$days&&(float)($surplus[(String)(intval($year) - 1)]['annual']>0))
 				$type = 'annual';
 		}
@@ -34,12 +43,7 @@ class VacationController extends BaseController {
 				$bonus = max(0, min($days, (float)($surplus[(String)(intval($year) - 1)][$type])));
 			}
 		}
-		if (!isset($surplus[$year])) {
-			$surplus[$year] = $employee->initSurplus(intval($year));
-		}
-		if (!isset($surplus[(String)(intval($year) - 1)])) {
-			$surplus[(String)(intval($year) - 1)] = $employee->initSurplus(intval($year) - 1);
-		}
+
 
 		$surplus[$year][$type] = (String)((float)($surplus[$year][$type]) - ($days - $bonus));
 		$surplus[(String)(intval($year) - 1)][$type] = (String)((float)($surplus[(String)(intval($year) - 1)][$type]) - $bonus);
@@ -65,11 +69,12 @@ class VacationController extends BaseController {
 
 	public function vacation_stat() {
 		$year = Input::get('year');
-		if (!in_array(Session::get('userEmail'),['huanglinjie@baixing.com','lihanyang@baixing.net']) ) {
+		if (!in_array(Session::get('userEmail'),['huanglingjie@baixing.com','lihanyang@baixing.net']) ) {
 			$employees = [Employee::getByEmail(Session::get('userEmail'))];
 		} else {
 			$employees = Employee::all();
 		}
+//		$employees = Employee::all();
 		$tmp = array();
 		foreach ($employees as $employee) {
 			if ($employee == null) continue;
@@ -138,7 +143,7 @@ class VacationController extends BaseController {
 	}
 
 	public function xiaojia() {
-		if (Session::get('userEmail') != 'huanglinjie@baixing.com') {
+		if (Session::get('userEmail') != 'huanglinjie@baixing.com'&&Session::get('userEmail') != 'lihanyang@baixing.net') {
 			return $this->error('不是管理员暂时还不能销假哦~');
 		}
 		$id = Input::get('id');
