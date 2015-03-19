@@ -7,17 +7,17 @@
 	<link rel=”shortcut icon” href=”/favicon.ico” mce_href=”/favicon.ico” type=”image/x-icon”>
 	<meta name='description' content='employee manage for hr'>
 	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
-	<link href='http://s.baixing.net/ace/css/bootstrap.min.c8e7ee78.css' rel='stylesheet'>
-	<link href='http://s.baixing.net/ace/css/bootstrap-responsive.min.e2984ff2.css' rel='stylesheet'>
-	<link href='http://s.baixing.net/ace/css/jquery.datetimepicker.2f4a13b7.css' rel='stylesheet'>
-	<link rel='stylesheet' href='http://s.baixing.net/ace/css/font-awesome.min.b2bb0bcf.css'>
-	<link rel='stylesheet' href='http://s.baixing.net/ace/css/ace-fonts.d8f31340.css'>
+	<link href='http://s.baixing.net/ace/css/bootstrap.min.css' rel='stylesheet'>
+	<link href='http://s.baixing.net/ace/css/bootstrap-responsive.min.css' rel='stylesheet'>
+	<link href='http://s.baixing.net/ace/css/jquery.datetimepicker.css' rel='stylesheet'>
+	<link rel='stylesheet' href='http://s.baixing.net/ace/css/font-awesome.min.css'>
+	<link rel='stylesheet' href='http://s.baixing.net/ace/css/ace-fonts.css'>
 	<link rel='stylesheet' href='http://s.baixing.net/ace/css/progressbar.css'>
-	<link rel='stylesheet' href='http://s.baixing.net/ace/css/ace.min.26d8c51e.css'>
-	<link rel='stylesheet' href='http://s.baixing.net/ace/css/ace-responsive.min.a7dfc8ad.css'>
-	<link rel='stylesheet' href='http://s.baixing.net/ace/css/ace-skins.min.7928911a.css'>
-	<link rel='stylesheet' href='http://s.baixing.net/ace/css/datepicker.380e57dd.css'>
-	<link rel='stylesheet' href='http://s.baixing.net/ace/css/jquery.dataTables.min.042c09e7.css'>
+	<link rel='stylesheet' href='http://s.baixing.net/ace/css/ace.min.css'>
+	<link rel='stylesheet' href='http://s.baixing.net/ace/css/ace-responsive.min.css'>
+	<link rel='stylesheet' href='http://s.baixing.net/ace/css/ace-skins.min.css'>
+	<link rel='stylesheet' href='http://s.baixing.net/ace/css/datepicker.css'>
+	<link rel='stylesheet' href='http://s.baixing.net/ace/css/jquery.dataTables.min.css'>
 	<style> .vacation_toolbar, .vacation_export {
 			float: right;
 			margin-right: 10px
@@ -115,22 +115,22 @@
 	</div>
 </div>
 </body>
-<script src='http://s.baixing.net/ace/js/jquery-2.0.3.min.5e915c3c.js'></script>
-<script src='http://s.baixing.net/ace/js/jquery-ui-1.10.3.custom.min.be93056f.js'></script>
-<script src='http://s.baixing.net/ace/js/jquery.ui.touch-punch.min.920b3c60.js'></script>
-<script src='http://s.baixing.net/ace/js/jquery.slimscroll.min.15ec1bd5.js'></script>
-<script src='http://s.baixing.net/ace/js/jquery.easy-pie-chart.min.d69818cd.js'></script>
-<script src='http://s.baixing.net/ace/js/jquery.dataTables.min.c4a622f3.js'></script>
-<script src='http://s.baixing.net/ace/js/flot/jquery.flot.min.a32d2288.js'></script>
-<script src='http://s.baixing.net/ace/js/flot/jquery.flot.pie.min.26a87187.js'></script>
-<script src='http://s.baixing.net/ace/js/flot/jquery.flot.resize.min.9acf3a70.js'></script>
-<script src='http://s.baixing.net/ace/js/ace-elements.min.dd8a038b.js'></script>
+<script src='http://s.baixing.net/ace/js/jquery-2.0.3.min.js'></script>
+<script src='http://s.baixing.net/ace/js/jquery-ui-1.10.3.custom.min.js'></script>
+<script src='http://s.baixing.net/ace/js/jquery.ui.touch-punch.min.js'></script>
+<script src='http://s.baixing.net/ace/js/jquery.slimscroll.min.js'></script>
+<script src='http://s.baixing.net/ace/js/jquery.easy-pie-chart.min.js'></script>
+<script src='http://s.baixing.net/ace/js/jquery.dataTables.min.js'></script>
+<script src='http://s.baixing.net/ace/js/flot/jquery.flot.min.js'></script>
+<script src='http://s.baixing.net/ace/js/flot/jquery.flot.pie.min.js'></script>
+<script src='http://s.baixing.net/ace/js/flot/jquery.flot.resize.min.js'></script>
+<script src='http://s.baixing.net/ace/js/ace-elements.min.js'></script>
 <script src='http://s.baixing.net/ace/js/ace.min.96ac5e56.js'></script>
-<script src='http://s.baixing.net/ace/js/date-time/bootstrap-datepicker.min.ee572cf9.js'></script>
-<script src='http://s.baixing.net/ace/js/bootstrap.min.9afa28aa.js'></script>
-<script src='http://s.baixing.net/Puerh/js/bootstrap.9bc04ef0.js'></script>
-<script src='http://s.baixing.net/ace/js/ace.min.96ac5e56.js'></script>
-<script src='http://s.baixing.net/ace/js/jquery.datetimepicker.70cb9330.js'></script>
+<script src='http://s.baixing.net/ace/js/date-time/bootstrap-datepicker.min.js'></script>
+<script src='http://s.baixing.net/ace/js/bootstrap.min.js'></script>
+<script src='http://s.baixing.net/Puerh/js/bootstrap.js'></script>
+<script src='http://s.baixing.net/ace/js/ace.min.js'></script>
+<script src='http://s.baixing.net/ace/js/jquery.datetimepicker.js'></script>
 <script src='http://s.baixing.net/ace/js/progressbar.min.js'></script>
 <script> var dateregex = /^\d{4}-\d{2}-\d{2}$/;
 	var halfYear = ((new Date()).getMonth() >= 6);
