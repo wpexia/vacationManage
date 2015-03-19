@@ -106,7 +106,7 @@
 		</table>
 		<div id='vacation_toolbar' class='hidden'>查询范围<span style='margin:0;margin-left:10px'
 		                                                    class='input-append'><input type='text' name='year'
-		                                                                                style='margin:0' value='2014'
+		                                                                                style='margin:0' value='<?= date('Y');?>'
 		                                                                                id='year' class='span1'><span
 					class='add-on'>年</span></span><input type='text' name='from' value='01-01' id='from' class='span1'>到<input
 				type='text' name='to' value='12-31' id='to' class='span1'></div>
