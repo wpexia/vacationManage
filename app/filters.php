@@ -94,11 +94,13 @@ Route::filter('login',function(){
 });
 
 Route::filter('superman',function(){
+	$manage = ['huanglingjie@baixing.com', 'lihanyang@baixing.net','wangyuan@baixing.com',
+		'zhouweiwei@baixing.net'];
 	if(!Session::has('userEmail')){
 		Session::put('redirect',URL::current());
 		return  Redirect::action('GoogleController@index');
 	}
-	if(!in_array(Session::get('userEmail'),['huanglingjie@baixing.com','lihanyang@baixing.net'])){
+	if(!in_array(Session::get('userEmail'),$manage)){
 		Session::put('redirect',URL::current());
 		return  Redirect::action('GoogleController@index');
 	}

@@ -143,7 +143,8 @@ class VacationController extends BaseController {
 	}
 
 	public function xiaojia() {
-		if (Session::get('userEmail') != 'huanglinjie@baixing.com'&&Session::get('userEmail') != 'lihanyang@baixing.net') {
+		if (!in_array(Session::get('userEmail'),['huanglingjie@baixing.com', 'lihanyang@baixing.net','wangyuan@baixing.com',
+			'zhouweiwei@baixing.net'])){
 			return $this->error('不是管理员暂时还不能销假哦~');
 		}
 		$id = Input::get('id');
